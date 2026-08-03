@@ -1,6 +1,7 @@
 import "./Sidebar.css";
 
 function Sidebar() {
+  
   const menu = [
     {
       icon: "fa-solid fa-house",
