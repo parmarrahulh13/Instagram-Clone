@@ -1,22 +1,49 @@
 import "./Reels.css";
 import Reel from "./assets/Reel.js";
 import reeldata from "./assets/reeldata.js";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function Reels() {
-  const videoRef = useRef(null);
-  const handleVideoClick = (event) => {
-  const video = event.target;
+  const videoRefs = useRef([]);
 
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-};
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+
+          if (entry.isIntersecting) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.7,
+      }
+    );
+
+    videoRefs.current.forEach((video) => {
+      if (video) observer.observe(video);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleVideoClick = (event) => {
+    const video = event.target;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
 
   return (
     <div className="reels-page">
+
       <div className="account-details">
         {Reel.map((item, index) => (
           <div className="reel-items" key={index}>
@@ -30,19 +57,19 @@ function Reels() {
         {reeldata.map((item, index) => (
           <div className="reel" key={index}>
             <video
-  className="video"
-  src={item.video}
-  autoPlay
-  loop
-  // muted
-  playsInline
-  onClick={handleVideoClick}
-/>
+              ref={(video) => (videoRefs.current[index] = video)}
+              className="video"
+              src={item.video}
+              loop
+              playsInline
+              onClick={handleVideoClick}
+            />
           </div>
         ))}
       </div>
 
       <div className="reel-actions"></div>
+
     </div>
   );
 }

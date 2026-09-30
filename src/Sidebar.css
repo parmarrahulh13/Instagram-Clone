@@ -1,42 +1,196 @@
-.sidebar{
-    height: 100vh;
-    width: 80px;
-    background: #000;
-    color: #000;
-    transition: 0.3s;
-    overflow: hidden;
-    flex-shrink: 0;
-}
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
 
-
-.sidebar:hover{
     width: 220px;
-    color: #fff;
-}
+    height: 100vh;
 
-
-.menu-item{
     display: flex;
-    height: 60px;
-    padding-top: 10px;
-    border-radius: 5px;
-    
-}
-.menu-item p{
-    padding-left: 40px;
-    cursor: pointer;
-}
-.menu-item:hover{
-    background: #26282c;
-}
-.website-icon{
-    margin-bottom: 100px;
-    margin-top: 20px;
-    text-align: left;
-    
-}
-.sidebar i{
-    font-size: 25px;
-    margin-left: 20px;
+    flex-direction: column;
+
+    background: #000;
     color: #fff;
+
+    padding: 20px 12px;
+
+    border-right: 1px solid #262626;
+
+    z-index: 100;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   INSTAGRAM LOGO
+========================= */
+
+.website-icon {
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 0 15px;
+
+    margin-bottom: 20px;
+}
+
+.website-icon i {
+    margin: 0;
+
+    font-size: 30px;
+    color: #fff;
+}
+
+.website-icon span {
+    font-family: cursive;
+
+    font-size: 25px;
+    font-weight: 600;
+
+    color: #fff;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+/* =========================
+   MENU ITEM
+========================= */
+
+.menu-item {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+.menu-item i {
+    width: 25px;
+
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #fff;
+
+    text-align: center;
+
+    transition: transform 0.2s ease;
+}
+
+.menu-item p {
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    color: #fff;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.menu-item:hover {
+    background: #1f1f1f;
+}
+
+.menu-item:hover i {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   ACTIVE ITEM
+========================= */
+
+.menu-item.active {
+    background: #1f1f1f;
+}
+
+.menu-item.active p {
+    font-weight: 700;
+}
+
+.menu-item.active i {
+    font-size: 23px;
+}
+
+
+/* =========================
+   MORE
+========================= */
+
+.more {
+    margin-top: auto;
+
+    padding-top: 20px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        width: 70px;
+
+        padding: 20px 8px;
+    }
+
+    .website-icon {
+        justify-content: center;
+
+        padding: 0;
+
+        margin-bottom: 30px;
+    }
+
+    .website-icon span,
+    .menu-item p {
+        display: none;
+    }
+
+    .menu-item {
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .menu-item i {
+        font-size: 22px;
+    }
 }

@@ -1,7 +1,6 @@
 import "./Sidebar.css";
 
 function Sidebar() {
-  
   const menu = [
     {
       icon: "fa-solid fa-house",
@@ -14,6 +13,7 @@ function Sidebar() {
     {
       icon: "fa-solid fa-clapperboard",
       text: "Reels",
+      active: true,
     },
     {
       icon: "fa-regular fa-paper-plane",
@@ -34,24 +34,36 @@ function Sidebar() {
   ];
 
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
+
+      {/* Instagram Logo */}
       <div className="website-icon">
         <i className="fa-brands fa-instagram"></i>
-        
+        <span>Instagram</span>
       </div>
 
-      {menu.map((item, index) => (
-        <div className="menu-item" key={index}>
-          <i className={item.icon}></i>
-          <p>{item.text}</p>
+      {/* Menu */}
+      <nav className="sidebar-menu">
+        {menu.map((item, index) => (
+          <div
+            className={`menu-item ${item.active ? "active" : ""}`}
+            key={index}
+          >
+            <i className={item.icon}></i>
+            <p>{item.text}</p>
+          </div>
+        ))}
+      </nav>
+
+      {/* More */}
+      <div className="more">
+        <div className="menu-item">
+          <i className="fa-solid fa-bars"></i>
+          <p>More</p>
         </div>
-      ))}
-
-      <div className="menu-item">
-        <i className="fa-solid fa-bars"></i>
-        <p>More</p>
       </div>
-    </div>
+
+    </aside>
   );
 }
 
