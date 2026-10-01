@@ -2,74 +2,23 @@
     width: 100%;
     height: 100vh;
 
+    background: #0b0e12;
+
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    gap: 25px;
-
-    background: #000;
-    color: white;
 
     overflow: hidden;
 }
 
 
 /* =========================
-   ACCOUNT DETAILS
-========================= */
-
-.account-details {
-    width: 180px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-
-    align-self: flex-end;
-
-    margin-bottom: 70px;
-}
-
-.reel-items {
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 12px 15px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    transition: background 0.2s ease;
-}
-
-.reel-items:hover {
-    background: #1c1c1c;
-}
-
-.reel-items i {
-    font-size: 22px;
-}
-
-.reel-items p {
-    margin: 0;
-
-    font-size: 14px;
-    font-weight: 500;
-}
-
-
-/* =========================
-   REEL CONTAINER
+   SCROLL CONTAINER
 ========================= */
 
 .reel-video {
     height: 100vh;
 
-    overflow-y: auto;
+    overflow-y: scroll;
 
     scroll-snap-type: y mandatory;
 
@@ -82,20 +31,90 @@
 
 
 /* =========================
-   INDIVIDUAL REEL
+   ONE COMPLETE REEL ROW
 ========================= */
 
 .reel {
-    position: relative;
-
-    width: 430px;
     height: 100vh;
 
     display: flex;
     align-items: center;
-    justify-content: center;
 
     scroll-snap-align: start;
+}
+
+
+/* =========================
+   LEFT INFO
+========================= */
+
+.reel-info {
+    width: 300px;
+
+    align-self: flex-end;
+
+    margin-bottom: 35px;
+    margin-right: 20px;
+
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+.profile-picture {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #333;
+}
+
+.user-info strong {
+    font-size: 14px;
+}
+
+.user-info span {
+    color: #777;
+}
+
+.user-info button {
+    border: none;
+    background: none;
+
+    color: #4da3ff;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.reel-info p {
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    margin: 0 0 10px;
+}
+
+.music {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 13px;
+}
+
+.music i {
+    font-size: 12px;
 }
 
 
@@ -103,13 +122,24 @@
    VIDEO
 ========================= */
 
+.video-container {
+    position: relative;
+
+    width: 420px;
+    height: 685px;
+
+    flex-shrink: 0;
+}
+
 .video {
     width: 100%;
-    height: 94%;
+    height: 100%;
 
     object-fit: cover;
 
-    border-radius: 10px;
+    border-radius: 5px;
+
+    display: block;
 
     cursor: pointer;
 
@@ -121,11 +151,11 @@
    RIGHT ACTIONS
 ========================= */
 
-.video-actions {
-    position: absolute;
+.reel-actions {
+    width: 70px;
 
-    right: -70px;
-    bottom: 80px;
+    margin-left: 20px;
+    margin-top: 150px;
 
     display: flex;
     flex-direction: column;
@@ -135,64 +165,74 @@
     gap: 22px;
 }
 
-.video-actions button {
+.action {
     display: flex;
     flex-direction: column;
+
     align-items: center;
-
+    
     gap: 5px;
-
-    background: none;
-    border: none;
 
     color: white;
 
     cursor: pointer;
-
-    font-size: 12px;
 }
 
-.video-actions i {
-    font-size: 24px;
+.action i {
+    font-size: 25px;
+    /* font-weight:00; */
 
     transition: transform 0.2s ease;
 }
 
-.video-actions button:hover i {
-    transform: scale(1.15);
+.action:hover i {
+    transform: scale(1.1);
 }
 
-.video-actions span {
-    font-size: 11px;
+.action span {
+    font-size: 12px;
 }
 
 
 /* =========================
-   RESPONSIVE
+   PROFILE
 ========================= */
 
-@media (max-width: 900px) {
+.action-profile {
+    margin-top: 5px;
+}
 
-    .account-details {
-        display: none;
-    }
+.small-profile {
+    width: 28px;
+    height: 28px;
 
-    .reel-video {
-        width: 100%;
-    }
+    border-radius: 50%;
 
-    .reel {
-        width: 100vw;
-    }
+    background: #333;
 
-    .video {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
+    border: 2px solid white;
+}
 
-    .video-actions {
-        right: 15px;
-        bottom: 100px;
-    }
+
+/* =========================
+   SOUND
+========================= */
+
+.sound-button {
+    position: absolute;
+
+    right: 15px;
+    bottom: 15px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    color: white;
+
+    cursor: pointer;
 }

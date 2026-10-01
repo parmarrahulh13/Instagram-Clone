@@ -13,7 +13,7 @@ function Reels() {
           const video = entry.target;
 
           if (entry.isIntersecting) {
-            video.play();
+            video.play().catch(() => {});
           } else {
             video.pause();
           }
@@ -44,31 +44,103 @@ function Reels() {
   return (
     <div className="reels-page">
 
-      <div className="account-details">
-        {Reel.map((item, index) => (
-          <div className="reel-items" key={index}>
-            <i className={item.icon}></i>
-            <p>{item.text}</p>
-          </div>
-        ))}
-      </div>
-
       <div className="reel-video">
+
         {reeldata.map((item, index) => (
           <div className="reel" key={index}>
-            <video
-              ref={(video) => (videoRefs.current[index] = video)}
-              className="video"
-              src={item.video}
-              loop
-              playsInline
-              onClick={handleVideoClick}
-            />
+
+            {/* LEFT SIDE - USER / CAPTION / MUSIC */}
+            <div className="reel-info">
+
+              <div className="user-info">
+                <div className="profile-picture"></div>
+
+                <strong>kxanime_45</strong>
+
+                <span>•</span>
+
+                <button>Follow</button>
+              </div>
+
+              <p>
+                Winter Hit different ❄️✨ Edited by
+                @kxanime_45
+              </p>
+
+              <div className="music">
+                <i className="fa-solid fa-music"></i>
+                <span>Sia • Snowman</span>
+              </div>
+
+            </div>
+
+
+            {/* CENTER - VIDEO */}
+            <div className="video-container">
+
+              <video
+                ref={(video) => {
+                  videoRefs.current[index] = video;
+                }}
+                className="video"
+                src={item.video}
+                loop
+                playsInline
+                onClick={handleVideoClick}
+              />
+
+              {/* SOUND BUTTON */}
+              <button className="sound-button">
+                <i className="fa-solid fa-volume-high"></i>
+              </button>
+
+            </div>
+
+
+            {/* RIGHT SIDE - ACTIONS */}
+            <div className="reel-actions">
+
+              <div className="action">
+                <i className="fa-regular fa-heart"></i>
+                <span>2,508</span>
+              </div>
+
+              <div className="action">
+                <i className="fa-regular fa-comment"></i>
+                <span>24</span>
+              </div>
+
+              {/* <div className="action">
+                <i className="fa-solid fa-retweet"></i>
+                <span>92</span>
+              </div> */}
+
+              <div className="action">
+                <i className="fa-regular fa-paper-plane"></i>
+                <span>2</span>
+              </div>
+
+              <div className="action">
+                <i className="fa-regular fa-bookmark"></i>
+                <span>1</span>
+              </div>
+
+              <div className="action">
+                <i className="fa-solid fa-ellipsis"></i>
+                <span></span>
+              </div>
+
+              <div className="action-profile">
+                <div className="small-profile"></div>
+                <span></span>
+              </div>
+
+            </div>
+
           </div>
         ))}
-      </div>
 
-      <div className="reel-actions"></div>
+      </div>
 
     </div>
   );
