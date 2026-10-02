@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ activePage, setActivePage }) {
   const menu = [
     {
       icon: "fa-solid fa-house",
@@ -13,7 +13,6 @@ function Sidebar() {
     {
       icon: "fa-solid fa-clapperboard",
       text: "Reels",
-      active: true,
     },
     {
       icon: "fa-regular fa-paper-plane",
@@ -36,26 +35,29 @@ function Sidebar() {
   return (
     <aside className="sidebar">
 
-      {/* Instagram Logo */}
       <div className="website-icon">
         <i className="fa-brands fa-instagram"></i>
         <span>Instagram</span>
       </div>
 
-      {/* Menu */}
       <nav className="sidebar-menu">
-        {menu.map((item, index) => (
+
+        {menu.map((item) => (
           <div
-            className={`menu-item ${item.active ? "active" : ""}`}
-            key={index}
+            key={item.text}
+            className={`menu-item ${
+              activePage === item.text ? "active" : ""
+            }`}
+            onClick={() => setActivePage(item.text)}
           >
             <i className={item.icon}></i>
+
             <p>{item.text}</p>
           </div>
         ))}
+
       </nav>
 
-      {/* More */}
       <div className="more">
         <div className="menu-item">
           <i className="fa-solid fa-bars"></i>

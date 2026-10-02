@@ -1,0 +1,490 @@
+.profile-page {
+  width: 100%;
+  max-width: 935px;
+
+  margin: 0 auto;
+
+  padding: 55px 40px 80px;
+
+  color: white;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.profile-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 70px;
+}
+
+
+/* =========================
+   PROFILE DP
+========================= */
+
+.profile-dp {
+  width: 150px;
+  height: 150px;
+
+  padding: 4px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #feda75,
+    #fa7e1e,
+    #d62976,
+    #962fbf,
+    #4f5bd5
+  );
+}
+
+.dp-inner {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #17181c;
+
+  border: 5px solid #0b0c0f;
+
+  font-size: 50px;
+
+  color: #777;
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.profile-info {
+  flex: 1;
+
+  padding-top: 5px;
+}
+
+.username-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.username-row h2 {
+  margin: 0;
+
+  font-size: 24px;
+
+  font-weight: 500;
+}
+
+.verified {
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #3897f0;
+
+  font-size: 11px;
+
+  font-weight: bold;
+}
+
+.settings {
+  margin-left: 8px;
+
+  font-size: 19px;
+
+  color: #aaa;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.settings:hover {
+  color: white;
+
+  transform: rotate(30deg);
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+.profile-name {
+  margin: 15px 0;
+
+  font-size: 14px;
+
+  color: #ddd;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.profile-stats {
+  display: flex;
+
+  gap: 35px;
+
+  margin: 20px 0;
+}
+
+.profile-stats div {
+  display: flex;
+
+  gap: 5px;
+
+  align-items: center;
+}
+
+.profile-stats strong {
+  font-size: 15px;
+}
+
+.profile-stats span {
+  color: #ccc;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   BIO
+========================= */
+
+.profile-bio {
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.profile-bio p {
+  margin: 5px 0;
+
+  color: #ddd;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.profile-buttons {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 30px;
+}
+
+.profile-buttons button {
+  flex: 1;
+
+  height: 38px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #26282d;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.profile-buttons button:hover {
+  background: #34363c;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   HIGHLIGHTS
+========================= */
+
+.highlights {
+  display: flex;
+
+  gap: 28px;
+
+  margin: 45px 0 40px;
+}
+
+.highlight {
+  width: 80px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.highlight-circle {
+  width: 74px;
+  height: 74px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 3px solid #292c32;
+
+  background: #17181c;
+
+  font-size: 24px;
+
+  transition: 0.2s;
+}
+
+.highlight:hover .highlight-circle {
+  transform: scale(1.05);
+
+  border-color: #555;
+}
+
+.highlight span {
+  font-size: 12px;
+
+  color: #ddd;
+}
+
+
+/* Different highlight styles */
+
+.project {
+  background: linear-gradient(
+    135deg,
+    #181818,
+    #333
+  );
+}
+
+.coding {
+  background: linear-gradient(
+    135deg,
+    #151515,
+    #292929
+  );
+}
+
+.college {
+  background: linear-gradient(
+    135deg,
+    #181818,
+    #303030
+  );
+}
+
+.new {
+  font-size: 35px;
+
+  color: #777;
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.profile-tabs {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  height: 55px;
+
+  border-top: 1px solid #292c30;
+  border-bottom: 1px solid #292c30;
+}
+
+.profile-tab {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 19px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.profile-tab:hover {
+  color: white;
+}
+
+.profile-tab.active {
+  color: white;
+}
+
+.profile-tab.active::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 30%;
+
+  width: 40%;
+
+  height: 2px;
+
+  background: white;
+}
+
+
+/* =========================
+   EMPTY POSTS
+========================= */
+
+.empty-posts {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  min-height: 330px;
+
+  color: white;
+}
+
+.empty-post-icon {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #777;
+
+  border-radius: 50%;
+
+  font-size: 25px;
+
+  margin-bottom: 15px;
+}
+
+.empty-posts h2 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+}
+
+.empty-posts p {
+  margin: 0;
+
+  max-width: 280px;
+
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .profile-page {
+    padding: 30px 18px;
+  }
+
+  .profile-header {
+    gap: 25px;
+  }
+
+  .profile-dp {
+    width: 90px;
+    height: 90px;
+  }
+
+  .dp-inner {
+    font-size: 30px;
+  }
+
+  .username-row h2 {
+    font-size: 18px;
+  }
+
+  .profile-stats {
+    gap: 12px;
+  }
+
+  .profile-stats div {
+    flex-direction: column;
+
+    gap: 2px;
+  }
+
+  .profile-stats span {
+    font-size: 11px;
+  }
+
+  .highlights {
+    gap: 15px;
+  }
+
+  .highlight-circle {
+    width: 62px;
+    height: 62px;
+  }
+
+}
