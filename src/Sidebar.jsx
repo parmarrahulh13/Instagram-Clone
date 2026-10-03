@@ -7,10 +7,6 @@ function Sidebar({ activePage, setActivePage }) {
       text: "Home",
     },
     {
-      icon: "fa-solid fa-magnifying-glass",
-      text: "Search",
-    },
-    {
       icon: "fa-solid fa-clapperboard",
       text: "Reels",
     },
@@ -18,6 +14,11 @@ function Sidebar({ activePage, setActivePage }) {
       icon: "fa-regular fa-paper-plane",
       text: "Messages",
     },
+    {
+      icon: "fa-solid fa-magnifying-glass",
+      text: "Search",
+    },
+
     {
       icon: "fa-regular fa-heart",
       text: "Notifications",
@@ -34,20 +35,16 @@ function Sidebar({ activePage, setActivePage }) {
 
   return (
     <aside className="sidebar">
-
       <div className="website-icon">
         <i className="fa-brands fa-instagram"></i>
         <span>Instagram</span>
       </div>
 
       <nav className="sidebar-menu">
-
         {menu.map((item) => (
           <div
             key={item.text}
-            className={`menu-item ${
-              activePage === item.text ? "active" : ""
-            }`}
+            className={`menu-item ${activePage === item.text ? "active" : ""}`}
             onClick={() => setActivePage(item.text)}
           >
             <i className={item.icon}></i>
@@ -55,7 +52,6 @@ function Sidebar({ activePage, setActivePage }) {
             <p>{item.text}</p>
           </div>
         ))}
-
       </nav>
 
       <div className="more">
@@ -64,7 +60,6 @@ function Sidebar({ activePage, setActivePage }) {
           <p>More</p>
         </div>
       </div>
-
     </aside>
   );
 }
