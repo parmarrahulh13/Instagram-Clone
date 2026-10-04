@@ -1,9 +1,8 @@
 import "./Reels.css";
-import Reel from "./assets/Reel.js";
 import reeldata from "./assets/reeldata.js";
 import { useEffect, useRef } from "react";
 
-function Reels() {
+function Reels({ setActivePage }) {
   const videoRefs = useRef([]);
 
   useEffect(() => {
@@ -13,6 +12,13 @@ function Reels() {
           const video = entry.target;
 
           if (entry.isIntersecting) {
+            // Stop every other video
+            videoRefs.current.forEach((otherVideo) => {
+              if (otherVideo && otherVideo !== video) {
+                otherVideo.pause();
+              }
+            });
+
             video.play().catch(() => {});
           } else {
             video.pause();
@@ -32,13 +38,18 @@ function Reels() {
   }, []);
 
   const handleVideoClick = (event) => {
-    const video = event.target;
+    const video = event.currentTarget;
 
     if (video.paused) {
       video.play();
     } else {
       video.pause();
     }
+  };
+
+  // Open the reel creator's profile
+  const openProfile = () => {
+    setActivePage("UserProfile");
   };
 
   return (
@@ -49,17 +60,31 @@ function Reels() {
         {reeldata.map((item, index) => (
           <div className="reel" key={index}>
 
-            {/* LEFT SIDE - USER / CAPTION / MUSIC */}
+            {/* LEFT SIDE */}
             <div className="reel-info">
 
               <div className="user-info">
-                <div className="profile-picture"></div>
 
-                <strong>kxanime_45</strong>
+                {/* PROFILE PICTURE */}
+                <div
+                  className="profile-picture"
+                  onClick={openProfile}
+                >
+                  <i className="fa-solid fa-user"></i>
+                </div>
+
+                {/* USERNAME */}
+                <strong
+                  className="reel-username"
+                  onClick={openProfile}
+                >
+                  kxanime_45
+                </strong>
 
                 <span>•</span>
 
                 <button>Follow</button>
+
               </div>
 
               <p>
@@ -89,7 +114,6 @@ function Reels() {
                 onClick={handleVideoClick}
               />
 
-              {/* SOUND BUTTON */}
               <button className="sound-button">
                 <i className="fa-solid fa-volume-high"></i>
               </button>
@@ -97,7 +121,7 @@ function Reels() {
             </div>
 
 
-            {/* RIGHT SIDE - ACTIONS */}
+            {/* RIGHT SIDE */}
             <div className="reel-actions">
 
               <div className="action">
@@ -109,11 +133,6 @@ function Reels() {
                 <i className="fa-regular fa-comment"></i>
                 <span>24</span>
               </div>
-
-              {/* <div className="action">
-                <i className="fa-solid fa-retweet"></i>
-                <span>92</span>
-              </div> */}
 
               <div className="action">
                 <i className="fa-regular fa-paper-plane"></i>
@@ -127,12 +146,16 @@ function Reels() {
 
               <div className="action">
                 <i className="fa-solid fa-ellipsis"></i>
-                <span></span>
               </div>
 
-              <div className="action-profile">
-                <div className="small-profile"></div>
-                <span></span>
+              {/* SMALL PROFILE */}
+              <div
+                className="action-profile"
+                onClick={openProfile}
+              >
+                <div className="small-profile">
+                  <i className="fa-solid fa-user"></i>
+                </div>
               </div>
 
             </div>

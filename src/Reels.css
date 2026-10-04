@@ -208,6 +208,7 @@
 
 .action-profile {
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .small-profile {
@@ -219,6 +220,9 @@
     background: #333;
 
     border: 2px solid white;
+}
+.reel-username{
+    cursor: pointer;
 }
 
 
