@@ -1,9 +1,18 @@
 import "./Reels.css";
 import reeldata from "./assets/reeldata.js";
-import { useEffect, useRef } from "react";
+import messageData from "./messageData";
+import { useState, useEffect, useRef } from "react";
 
 function Reels({ setActivePage }) {
   const videoRefs = useRef([]);
+
+  const [showShare, setShowShare] = useState(false);
+  const [sentTo, setSentTo] = useState(null);
+  const [shareReel, setShareReel] = useState(null);
+
+  // =====================================
+  // PLAY ONLY VISIBLE REEL
+  // =====================================
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,7 +21,6 @@ function Reels({ setActivePage }) {
           const video = entry.target;
 
           if (entry.isIntersecting) {
-            // Stop every other video
             videoRefs.current.forEach((otherVideo) => {
               if (otherVideo && otherVideo !== video) {
                 otherVideo.pause();
@@ -31,11 +39,17 @@ function Reels({ setActivePage }) {
     );
 
     videoRefs.current.forEach((video) => {
-      if (video) observer.observe(video);
+      if (video) {
+        observer.observe(video);
+      }
     });
 
     return () => observer.disconnect();
   }, []);
+
+  // =====================================
+  // VIDEO CLICK
+  // =====================================
 
   const handleVideoClick = (event) => {
     const video = event.currentTarget;
@@ -47,10 +61,81 @@ function Reels({ setActivePage }) {
     }
   };
 
-  // Open the reel creator's profile
+  // =====================================
+  // PROFILE
+  // =====================================
+
   const openProfile = () => {
     setActivePage("UserProfile");
   };
+
+  // =====================================
+  // OPEN SHARE
+  // =====================================
+
+  const openShare = (reel) => {
+    setShareReel(reel);
+    setShowShare(true);
+    setSentTo(null);
+  };
+
+  // =====================================
+  // CLOSE SHARE
+  // =====================================
+
+  const closeShare = () => {
+    setShowShare(false);
+    setSentTo(null);
+    setShareReel(null);
+  };
+
+  // =====================================
+  // SEND REEL TO USER
+  // =====================================
+
+  const sendReel = (user) => {
+  if (!shareReel) return;
+
+  const newReelMessage = {
+    id: Date.now(),
+
+    type: "reel",
+
+    sender: "me",
+
+    time: new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+
+    reel: {
+      video: shareReel.video,
+      username: "kxanime_45",
+      caption: "Winter Hit different ❄️✨",
+    },
+  };
+
+  // Get existing shared reels
+  const existingReels = JSON.parse(
+    localStorage.getItem("sharedReels") || "{}"
+  );
+
+  // Add reel to this user's messages
+  if (!existingReels[user.id]) {
+    existingReels[user.id] = [];
+  }
+
+  existingReels[user.id].push(newReelMessage);
+
+  // Save
+  localStorage.setItem(
+    "sharedReels",
+    JSON.stringify(existingReels)
+  );
+
+  // Show Sent
+  setSentTo(user.id);
+};
 
   return (
     <div className="reels-page">
@@ -60,12 +145,14 @@ function Reels({ setActivePage }) {
         {reeldata.map((item, index) => (
           <div className="reel" key={index}>
 
-            {/* LEFT SIDE */}
+            {/* =====================================
+                LEFT SIDE
+            ===================================== */}
+
             <div className="reel-info">
 
               <div className="user-info">
 
-                {/* PROFILE PICTURE */}
                 <div
                   className="profile-picture"
                   onClick={openProfile}
@@ -73,7 +160,6 @@ function Reels({ setActivePage }) {
                   <i className="fa-solid fa-user"></i>
                 </div>
 
-                {/* USERNAME */}
                 <strong
                   className="reel-username"
                   onClick={openProfile}
@@ -83,7 +169,9 @@ function Reels({ setActivePage }) {
 
                 <span>•</span>
 
-                <button>Follow</button>
+                <button>
+                  Follow
+                </button>
 
               </div>
 
@@ -94,13 +182,18 @@ function Reels({ setActivePage }) {
 
               <div className="music">
                 <i className="fa-solid fa-music"></i>
-                <span>Sia • Snowman</span>
+                <span>
+                  Sia • Snowman
+                </span>
               </div>
 
             </div>
 
 
-            {/* CENTER - VIDEO */}
+            {/* =====================================
+                VIDEO
+            ===================================== */}
+
             <div className="video-container">
 
               <video
@@ -121,34 +214,50 @@ function Reels({ setActivePage }) {
             </div>
 
 
-            {/* RIGHT SIDE */}
+            {/* =====================================
+                RIGHT ACTIONS
+            ===================================== */}
+
             <div className="reel-actions">
 
+              {/* LIKE */}
               <div className="action">
                 <i className="fa-regular fa-heart"></i>
                 <span>2,508</span>
               </div>
 
+
+              {/* COMMENT */}
               <div className="action">
                 <i className="fa-regular fa-comment"></i>
                 <span>24</span>
               </div>
 
-              <div className="action">
+
+              {/* SHARE */}
+              <button
+                className="action share-action"
+                onClick={() => openShare(item)}
+              >
                 <i className="fa-regular fa-paper-plane"></i>
                 <span>2</span>
-              </div>
+              </button>
 
+
+              {/* SAVE */}
               <div className="action">
                 <i className="fa-regular fa-bookmark"></i>
                 <span>1</span>
               </div>
 
+
+              {/* MORE */}
               <div className="action">
                 <i className="fa-solid fa-ellipsis"></i>
               </div>
 
-              {/* SMALL PROFILE */}
+
+              {/* PROFILE */}
               <div
                 className="action-profile"
                 onClick={openProfile}
@@ -159,6 +268,107 @@ function Reels({ setActivePage }) {
               </div>
 
             </div>
+
+
+            {/* =====================================
+                SHARE POPUP
+            ===================================== */}
+
+            {showShare && (
+              <div
+                className="share-overlay"
+                onClick={closeShare}
+              >
+
+                <div
+                  className="share-box"
+                  onClick={(e) => e.stopPropagation()}
+                >
+
+                  {/* HEADER */}
+
+                  <div className="share-header">
+
+                    <h2>
+                      Share
+                    </h2>
+
+                    <button onClick={closeShare}>
+                      <i className="fa-solid fa-xmark"></i>
+                    </button>
+
+                  </div>
+
+
+                  {/* SEARCH */}
+
+                  <div className="share-search">
+
+                    <i className="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                      type="text"
+                      placeholder="Search"
+                    />
+
+                  </div>
+
+
+                  {/* PEOPLE */}
+
+                  <div className="share-users">
+
+                    {messageData.map((user) => (
+
+                      <div
+                        className="share-user"
+                        key={user.id}
+                      >
+
+                        <img
+                          src={user.image}
+                          alt={user.name}
+                        />
+
+
+                        <div className="share-user-info">
+
+                          <strong>
+                            {user.username}
+                          </strong>
+
+                          <span>
+                            {user.name}
+                          </span>
+
+                        </div>
+
+
+                        {/* SEND BUTTON */}
+
+                        <button
+                          className={
+                            sentTo === user.id
+                              ? "send-button sent"
+                              : "send-button"
+                          }
+                          onClick={() => sendReel(user)}
+                        >
+                          {sentTo === user.id
+                            ? "Sent"
+                            : "Send"}
+                        </button>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              </div>
+            )}
 
           </div>
         ))}

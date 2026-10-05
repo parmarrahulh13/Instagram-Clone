@@ -1,5 +1,5 @@
 import "./Messages.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Messages() {
   // --------------------------------
@@ -174,6 +174,59 @@ function Messages() {
 
   const [selectedChat, setSelectedChat] = useState(null);
 
+  // =================================
+  // RECEIVE SHARED REELS
+  // =================================
+
+  useEffect(() => {
+    const sharedReels = JSON.parse(
+      localStorage.getItem("sharedReels") || "{}"
+    );
+
+    // Nothing has been shared yet
+    if (Object.keys(sharedReels).length === 0) {
+      return;
+    }
+
+    setConversations((prev) => {
+      return prev.map((chat) => {
+        const reelsForUser = sharedReels[chat.id];
+
+        // No reels for this user
+        if (!reelsForUser || reelsForUser.length === 0) {
+          return chat;
+        }
+
+        // Get existing message IDs
+        const existingIds = new Set(
+          chat.messages.map((message) => message.id)
+        );
+
+        // Only add reels that aren't already in the chat
+        const newReels = reelsForUser.filter(
+          (reel) => !existingIds.has(reel.id)
+        );
+
+        // Nothing new
+        if (newReels.length === 0) {
+          return chat;
+        }
+
+        return {
+          ...chat,
+
+          messages: [
+            ...chat.messages,
+            ...newReels,
+          ],
+
+          lastMessage: "Sent a reel",
+          time: "now",
+        };
+      });
+    });
+  }, []);
+
   // --------------------------------
   // MESSAGE INPUT
   // --------------------------------
@@ -218,7 +271,10 @@ function Messages() {
         chat.id === selectedChat.id
           ? {
               ...chat,
-              messages: [...chat.messages, newMessage],
+              messages: [
+                ...chat.messages,
+                newMessage,
+              ],
               lastMessage: newMessage.text,
               time: "now",
             }
@@ -229,7 +285,10 @@ function Messages() {
     // Update currently opened chat
     setSelectedChat((prev) => ({
       ...prev,
-      messages: [...prev.messages, newMessage],
+      messages: [
+        ...prev.messages,
+        newMessage,
+      ],
       lastMessage: newMessage.text,
       time: "now",
     }));
@@ -248,7 +307,9 @@ function Messages() {
 
         <div className="chat-screen">
 
-          {/* CHAT HEADER */}
+          {/* ==============================
+              CHAT HEADER
+          ============================== */}
 
           <div className="chat-header">
 
@@ -275,13 +336,17 @@ function Messages() {
               </div>
 
               <div>
-                <h3>{selectedChat.name}</h3>
+
+                <h3>
+                  {selectedChat.name}
+                </h3>
 
                 <p>
                   {selectedChat.online
                     ? "Active now"
                     : `@${selectedChat.username}`}
                 </p>
+
               </div>
 
             </div>
@@ -304,8 +369,9 @@ function Messages() {
 
           </div>
 
-
-          {/* CHAT MESSAGES */}
+          {/* ==============================
+              CHAT MESSAGES
+          ============================== */}
 
           <div className="chat-messages">
 
@@ -316,17 +382,19 @@ function Messages() {
                 alt={selectedChat.name}
               />
 
-              <h2>{selectedChat.name}</h2>
+              <h2>
+                {selectedChat.name}
+              </h2>
 
-              <p>@{selectedChat.username}</p>
+              <p>
+                @{selectedChat.username}
+              </p>
 
             </div>
-
 
             <div className="today">
               Today
             </div>
-
 
             {selectedChat.messages.map((msg) => (
 
@@ -340,7 +408,43 @@ function Messages() {
               >
 
                 <div className="message-bubble">
-                  {msg.text}
+
+                  {/* ==============================
+                      SHARED REEL
+                  ============================== */}
+
+                  {msg.type === "reel" ? (
+
+                    <div className="shared-reel">
+
+                      <video
+                        src={msg.reel.video}
+                        controls
+                        playsInline
+                      />
+
+                      <div className="shared-reel-info">
+
+                        <strong>
+                          @{msg.reel.username}
+                        </strong>
+
+                        <p>
+                          {msg.reel.caption}
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  ) : (
+
+                    /* NORMAL TEXT MESSAGE */
+
+                    msg.text
+
+                  )}
+
                 </div>
 
                 <span className="message-time">
@@ -353,8 +457,9 @@ function Messages() {
 
           </div>
 
-
-          {/* MESSAGE INPUT */}
+          {/* ==============================
+              MESSAGE INPUT
+          ============================== */}
 
           <div className="message-input">
 
@@ -366,7 +471,9 @@ function Messages() {
               type="text"
               placeholder="Message..."
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) =>
+                setMessage(e.target.value)
+              }
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   sendMessage();
@@ -393,7 +500,6 @@ function Messages() {
     );
   }
 
-
   // =================================
   // INBOX / ALL MESSAGES
   // =================================
@@ -403,11 +509,15 @@ function Messages() {
 
       <div className="inbox">
 
-        {/* HEADER */}
+        {/* ==============================
+            HEADER
+        ============================== */}
 
         <div className="inbox-header">
 
-          <h2>yourusername</h2>
+          <h2>
+            yourusername
+          </h2>
 
           <button>
             <i className="fa-regular fa-pen-to-square"></i>
@@ -415,8 +525,9 @@ function Messages() {
 
         </div>
 
-
-        {/* SEARCH */}
+        {/* ==============================
+            SEARCH
+        ============================== */}
 
         <div className="message-search">
 
@@ -426,13 +537,16 @@ function Messages() {
             type="text"
             placeholder="Search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              setSearch(e.target.value)
+            }
           />
 
         </div>
 
-
-        {/* TABS */}
+        {/* ==============================
+            TABS
+        ============================== */}
 
         <div className="message-tabs">
 
@@ -450,8 +564,9 @@ function Messages() {
 
         </div>
 
-
-        {/* CONVERSATIONS */}
+        {/* ==============================
+            CONVERSATIONS
+        ============================== */}
 
         <div className="conversation-list">
 
@@ -462,7 +577,9 @@ function Messages() {
               <div
                 className="conversation"
                 key={user.id}
-                onClick={() => setSelectedChat(user)}
+                onClick={() =>
+                  setSelectedChat(user)
+                }
               >
 
                 {/* PROFILE */}
@@ -479,7 +596,6 @@ function Messages() {
                   )}
 
                 </div>
-
 
                 {/* TEXT */}
 
@@ -509,12 +625,13 @@ function Messages() {
 
                 </div>
 
-
                 {/* CAMERA */}
 
                 <button
                   className="camera-button"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) =>
+                    e.stopPropagation()
+                  }
                 >
                   <i className="fa-solid fa-camera"></i>
                 </button>
@@ -526,8 +643,13 @@ function Messages() {
           ) : (
 
             <div className="no-results">
+
               <i className="fa-solid fa-user-slash"></i>
-              <p>No users found</p>
+
+              <p>
+                No users found
+              </p>
+
             </div>
 
           )}
