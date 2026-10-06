@@ -1,0 +1,414 @@
+/* =====================================
+   DARK OVERLAY
+===================================== */
+
+.notification-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 900;
+
+    animation: fadeIn 0.2s ease;
+}
+
+
+/* =====================================
+   NOTIFICATION PANEL
+===================================== */
+
+.notification-panel {
+    position: fixed;
+
+    left: 220px;
+    top: 0;
+
+    width: 430px;
+    height: 100vh;
+
+    background: #0d0f12;
+
+    color: #f5f5f5;
+
+    z-index: 1000;
+
+    border-right: 1px solid #25282d;
+
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.35);
+
+    overflow-y: auto;
+
+    animation: slideIn 0.25s ease;
+}
+
+
+/* =====================================
+   SCROLLBAR
+===================================== */
+
+.notification-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.notification-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.notification-panel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+
+.notification-panel::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.notification-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 25px 25px 20px;
+}
+
+
+.notification-top h1 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+
+.notification-close {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #aaa;
+
+    font-size: 30px;
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.notification-close:hover {
+    color: white;
+
+    transform: scale(1.1);
+}
+
+
+/* =====================================
+   FILTERS
+===================================== */
+
+.notification-filters {
+    display: flex;
+
+    gap: 8px;
+
+    padding: 0 25px 20px;
+
+    overflow-x: auto;
+}
+
+.notification-filters::-webkit-scrollbar {
+    display: none;
+}
+
+
+.filter {
+    flex-shrink: 0;
+
+    height: 36px;
+
+    padding: 0 16px;
+
+    border-radius: 20px;
+
+    border: 1px solid #3a3d42;
+
+    background: transparent;
+
+    color: #f5f5f5;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.filter:hover {
+    background: #1c1f23;
+}
+
+
+.filter.active {
+    background: #262a30;
+
+    border-color: #262a30;
+}
+
+
+/* =====================================
+   SECTION
+===================================== */
+
+.notification-section {
+    padding: 0 25px;
+}
+
+
+.notification-section + .notification-section {
+    margin-top: 18px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #25282d;
+}
+
+
+.notification-section h2 {
+    margin: 0 0 14px;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* =====================================
+   NOTIFICATION ITEM
+===================================== */
+
+.notification-item {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 68px;
+
+    padding: 8px 0;
+
+    border-radius: 10px;
+
+    transition: background 0.2s;
+}
+
+
+.notification-item:hover {
+    background: #15171a;
+}
+
+
+/* =====================================
+   AVATAR
+===================================== */
+
+.notification-avatar {
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-right: 12px;
+
+    border: 1px solid #303238;
+}
+
+
+/* =====================================
+   MESSAGE
+===================================== */
+
+.notification-message {
+    flex: 1;
+
+    min-width: 0;
+
+    padding-right: 8px;
+}
+
+
+.notification-text {
+    font-size: 13px;
+
+    line-height: 18px;
+
+    color: #e7e7e7;
+}
+
+
+.notification-text strong {
+    color: white;
+
+    font-weight: 600;
+}
+
+
+.notification-text span {
+    color: #d4d4d4;
+}
+
+
+.notification-text small {
+    margin-left: 5px;
+
+    color: #777;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   FOLLOW BACK
+===================================== */
+
+.follow-back {
+    flex-shrink: 0;
+
+    height: 34px;
+
+    padding: 0 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #4f5df5;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.follow-back:hover {
+    background: #6370ff;
+}
+
+
+/* =====================================
+   FOLLOWING
+===================================== */
+
+.following {
+    flex-shrink: 0;
+
+    height: 34px;
+
+    padding: 0 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #292c31;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =====================================
+   POST IMAGE
+===================================== */
+
+.notification-post {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+
+    margin-left: 8px;
+}
+
+
+/* =====================================
+   ANIMATION
+===================================== */
+
+@keyframes slideIn {
+
+    from {
+        transform: translateX(-100%);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+
+    .notification-panel {
+        left: 0;
+
+        width: min(430px, 100%);
+    }
+
+}
