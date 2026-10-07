@@ -1,84 +1,36 @@
-
 import { useState } from "react";
 
 import Sidebar from "./Sidebar";
+import Home from "./Home";
 import Reels from "./Reels";
-import Profile from "./Profile";
 import Messages from "./Messages";
+import Profile from "./Profile";
 import Notifications from "./Notifications";
 
 import "./App.css";
 
 function App() {
-  const [activePage, setActivePage] = useState("Reels");
 
-  // Controls Notifications popup
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
-
-  // Handle sidebar navigation
-  const handlePageChange = (page) => {
-    if (page === "Notifications") {
-      setNotificationsOpen(true);
-      return;
-    }
-
-    setNotificationsOpen(false);
-    setActivePage(page);
-  };
+  const [activePage, setActivePage] = useState("Home");
 
   return (
     <div className="app">
 
-      {/* SIDEBAR */}
       <Sidebar
         activePage={activePage}
-        setActivePage={handlePageChange}
+        setActivePage={setActivePage}
       />
 
-      {/* MAIN CONTENT */}
-      <main className="main-content">
+      {activePage === "Home" && <Home />}
 
-        {activePage === "Home" && (
-          <div className="placeholder-page">
-            <h1>Home</h1>
-          </div>
-        )}
+      {activePage === "Reels" && <Reels />}
 
-        {activePage === "Reels" && (
-          <Reels setActivePage={setActivePage} />
-        )}
+      {activePage === "Messages" && <Messages />}
 
-        {activePage === "Search" && (
-          <div className="placeholder-page">
-            <h1>Search</h1>
-          </div>
-        )}
+      {activePage === "Profile" && <Profile />}
 
-        {activePage === "Messages" && (
-          <Messages />
-        )}
-
-        {activePage === "Create" && (
-          <div className="placeholder-page">
-            <h1>Create</h1>
-          </div>
-        )}
-
-        {activePage === "Profile" && (
-          <Profile />
-        )}
-
-        {activePage === "UserProfile" && (
-          <Profile />
-        )}
-
-      </main>
-
-      {/* NOTIFICATIONS POPUP */}
-      {notificationsOpen && (
-        <Notifications
-          onClose={() => setNotificationsOpen(false)}
-        />
+      {activePage === "Notifications" && (
+        <Notifications />
       )}
 
     </div>
@@ -86,4 +38,3 @@ function App() {
 }
 
 export default App;
-
