@@ -1,61 +1,72 @@
+
 import "./Sidebar.css";
 
-function Sidebar({ activePage, setActivePage }) {
-  const menu = [
+function Sidebar({
+  activePage,
+  setActivePage,
+  setMoreOpen,
+}) {
+  const menuItems = [
     {
-      icon: "fa-solid fa-house",
-      text: "Home",
+      name: "Home",
+      icon: "fa-house",
     },
     {
-      icon: "fa-solid fa-clapperboard",
-      text: "Reels",
+      name: "Reels",
+      icon: "fa-clapperboard",
     },
     {
-      icon: "fa-regular fa-paper-plane",
-      text: "Messages",
+      name: "Messages",
+      icon: "fa-facebook-messenger",
     },
     {
-      icon: "fa-solid fa-magnifying-glass",
-      text: "Search",
-    },
-
-    {
-      icon: "fa-regular fa-heart",
-      text: "Notifications",
+      name: "Search",
+      icon: "fa-magnifying-glass",
     },
     {
-      icon: "fa-solid fa-plus",
-      text: "Create",
+      name: "Notifications",
+      icon: "fa-heart",
     },
     {
-      icon: "fa-solid fa-circle-user",
-      text: "Profile",
+      name: "Create",
+      icon: "fa-square-plus",
+    },
+    {
+      name: "Profile",
+      icon: "fa-circle-user",
     },
   ];
 
   return (
     <aside className="sidebar">
+      {/* INSTAGRAM LOGO */}
       <div className="website-icon">
         <i className="fa-brands fa-instagram"></i>
         <span>Instagram</span>
       </div>
 
-      <nav className="sidebar-menu">
-        {menu.map((item) => (
+      {/* MAIN MENU */}
+      <div className="sidebar-menu">
+        {menuItems.map((item) => (
           <div
-            key={item.text}
-            className={`menu-item ${activePage === item.text ? "active" : ""}`}
-            onClick={() => setActivePage(item.text)}
+            key={item.name}
+            className={`menu-item ${
+              activePage === item.name ? "active" : ""
+            }`}
+            onClick={() => setActivePage(item.name)}
           >
-            <i className={item.icon}></i>
-
-            <p>{item.text}</p>
+            <i className={`fa-solid ${item.icon}`}></i>
+            <p>{item.name}</p>
           </div>
         ))}
-      </nav>
+      </div>
 
+      {/* MORE MENU */}
       <div className="more">
-        <div className="menu-item">
+        <div
+          className="menu-item"
+          onClick={() => setMoreOpen((previous) => !previous)}
+        >
           <i className="fa-solid fa-bars"></i>
           <p>More</p>
         </div>
@@ -65,3 +76,4 @@ function Sidebar({ activePage, setActivePage }) {
 }
 
 export default Sidebar;
+

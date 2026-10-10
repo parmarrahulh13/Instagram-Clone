@@ -610,60 +610,302 @@
 
 
 /* =====================================
-   RESPONSIVE
+   RESPONSIVE HOME PAGE
 ===================================== */
 
-@media (max-width: 1100px) {
+/* Laptop and smaller desktop */
+@media (max-width: 1200px) {
+  .home-feed {
+    width: min(630px, calc(100% - 40px));
+    margin-right: 0;
+  }
 
   .home-right {
     display: none;
   }
 
-  .home-feed {
-    margin-right: 0;
+  .home-page {
+    justify-content: center;
   }
-
 }
 
 
-@media (max-width: 700px) {
+/* =====================================
+   TABLETS
+===================================== */
 
+@media (max-width: 900px) {
   .home-page {
-    margin-left: 0;
-
-    width: 100%;
+    margin-left: 220px;
+    width: calc(100% - 220px);
   }
 
   .home-feed {
-    width: 100%;
-
-    padding-top: 10px;
+    width: min(600px, calc(100% - 30px));
+    padding-top: 20px;
   }
 
   .stories-container {
+    gap: 15px;
+    padding: 12px;
+  }
+
+  .story {
+    min-width: 65px;
+  }
+
+  .story-ring {
+    width: 60px;
+    height: 60px;
+  }
+
+  .post-image {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+
+/* =====================================
+   MOBILE PHONES
+===================================== */
+
+@media (max-width: 700px) {
+  .home-page {
+    margin-left: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 60px;
+
+    display: block;
+    overflow-x: hidden;
+  }
+
+  .home-feed {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    padding: 0 0 20px;
+    margin: 0;
+  }
+
+  /* Stories */
+
+  .stories-container {
+    width: 100%;
+    height: 105px;
+    box-sizing: border-box;
+
+    padding: 10px 12px;
+    gap: 13px;
+
     border-left: none;
     border-right: none;
-
     border-radius: 0;
+
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .story {
+    min-width: 60px;
+    gap: 5px;
+  }
+
+  .story-ring {
+    width: 56px;
+    height: 56px;
+    padding: 2px;
+    box-sizing: border-box;
+  }
+
+  .story-ring img {
+    border-width: 2px;
+  }
+
+  .story span {
+    width: 60px;
+    font-size: 11px;
+  }
+
+  .story-plus {
+    width: 18px;
+    height: 18px;
+    font-size: 13px !important;
+  }
+
+  /* Posts */
+
+  .posts-container {
+    margin-top: 10px;
   }
 
   .post {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+
     border-bottom: 1px solid #262626;
   }
 
+  /* Post header */
+
+  .post-header {
+    height: 55px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .post-user {
+    gap: 9px;
+    min-width: 0;
+  }
+
+  .post-user img {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .post-user strong {
+    font-size: 13px;
+  }
+
+  .post-user span {
+    font-size: 11px;
+  }
+
+  .more-btn {
+    padding: 8px;
+  }
+
+  /* Post image */
+
   .post-image-container {
+    width: 100%;
     border-radius: 0;
   }
 
-  .post-header,
-  .post-actions,
-  .post-likes,
-  .post-caption,
-  .view-comments,
-  .comment-box,
-  .post-time {
-    margin-left: 12px;
-    margin-right: 12px;
+  .post-image {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
   }
 
+  /* Post actions */
+
+  .post-actions {
+    height: 43px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .left-actions {
+    gap: 14px;
+  }
+
+  .action-btn {
+    font-size: 25px;
+  }
+
+  .save-btn {
+    font-size: 23px;
+  }
+
+  /* Likes and captions */
+
+  .post-likes {
+    margin: 3px 12px 7px;
+    font-size: 13px;
+  }
+
+  .post-caption {
+    margin: 0 12px;
+    font-size: 13px;
+    line-height: 19px;
+
+    overflow-wrap: anywhere;
+  }
+
+  .view-comments {
+    display: block;
+    margin: 0 12px;
+    padding: 7px 0;
+
+    font-size: 13px;
+  }
+
+  .comment-box {
+    margin: 0 12px;
+    padding: 7px 0 10px;
+    gap: 8px;
+  }
+
+  .comment-box input {
+    min-width: 0;
+    font-size: 13px;
+  }
+
+  .comment-box button {
+    font-size: 12px;
+  }
+
+  .post-time {
+    margin: 8px 12px 0;
+    font-size: 10px;
+  }
+
+  /* Hide desktop suggestions */
+
+  .home-right {
+    display: none;
+  }
 }
+
+
+/* =====================================
+   SMALL PHONES
+===================================== */
+
+@media (max-width: 380px) {
+  .stories-container {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .story {
+    min-width: 56px;
+  }
+
+  .story-ring {
+    width: 52px;
+    height: 52px;
+  }
+
+  .story span {
+    width: 56px;
+    font-size: 10px;
+  }
+
+  .left-actions {
+    gap: 12px;
+  }
+
+  .action-btn {
+    font-size: 23px;
+  }
+
+  .save-btn {
+    font-size: 21px;
+  }
+
+  .post-user strong {
+    font-size: 12px;
+  }
+}
+

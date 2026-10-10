@@ -1,0 +1,289 @@
+
+/* MORE MENU */
+
+.more-menu {
+  position: fixed;
+  left: 85px;
+  bottom: 20px;
+  width: 320px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+
+  background: #262626;
+  color: #f5f5f5;
+
+  border: 1px solid #363636;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.55);
+  z-index: 10000;
+
+  animation: moreSlideIn 0.2s ease;
+  font-family: Arial, sans-serif;
+}
+
+.more-menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.more-menu::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+@keyframes moreSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* HEADER */
+
+.more-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.more-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.more-close {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+/* MENU ITEMS */
+
+.more-menu-items {
+  padding: 8px;
+}
+
+.more-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+
+  color: #f5f5f5;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.more-item:hover {
+  background: #383838;
+}
+
+.more-item > i:first-child {
+  width: 22px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.more-item span:nth-child(2) {
+  flex: 1;
+}
+
+.more-arrow {
+  font-size: 12px !important;
+  color: #aaa;
+}
+
+.more-divider {
+  height: 6px;
+  margin: 8px -8px;
+  background: #1b1b1b;
+}
+
+/* SETTINGS SUBMENU */
+
+.more-settings {
+  padding: 5px 10px 10px 25px;
+  border-left: 2px solid #555;
+  margin: 0 12px 8px 20px;
+}
+
+.more-settings button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 5px;
+
+  color: #ddd;
+  background: transparent;
+  border: none;
+
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.more-settings button:hover {
+  color: white;
+}
+
+/* APPEARANCE TOGGLE */
+
+.more-toggle {
+  width: 34px;
+  height: 20px;
+  padding: 3px;
+
+  background: #555;
+  border-radius: 20px;
+  transition: background 0.2s ease;
+}
+
+.more-toggle span {
+  display: block;
+  width: 14px;
+  height: 14px;
+
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.more-toggle.active {
+  background: #0095f6;
+}
+
+.more-toggle.active span {
+  transform: translateX(14px);
+}
+
+/* LOGOUT */
+
+.logout-item {
+  color: #ff6262;
+}
+
+.logout-item:hover {
+  background: #452626;
+}
+
+/* FEEDBACK MESSAGE */
+
+.more-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin: 8px 12px;
+  padding: 12px;
+
+  background: #353535;
+  border-radius: 8px;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.more-message button {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+
+.more-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 18px;
+  border-top: 1px solid #3a3a3a;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.more-footer-logo {
+  font-size: 23px;
+  color: #f5f5f5;
+}
+
+.more-footer small {
+  margin-left: auto;
+  font-size: 10px;
+  color: #888;
+}
+
+/* LIGHT MODE */
+
+body.light-mode {
+  background: #fff;
+  color: #111;
+}
+
+body.light-mode .more-menu {
+  background: #fff;
+  color: #111;
+  border-color: #ddd;
+}
+
+body.light-mode .more-header {
+  border-bottom-color: #eee;
+}
+
+body.light-mode .more-close,
+body.light-mode .more-item,
+body.light-mode .more-settings button {
+  color: #111;
+}
+
+body.light-mode .more-item:hover {
+  background: #f0f0f0;
+}
+
+body.light-mode .more-divider {
+  background: #eee;
+}
+
+body.light-mode .more-footer {
+  border-top-color: #eee;
+}
+
+body.light-mode .more-footer-logo {
+  color: #111;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .more-menu {
+    left: 10px;
+    bottom: 10px;
+    width: min(320px, calc(100vw - 20px));
+    max-height: calc(100vh - 20px);
+  }
+}
+

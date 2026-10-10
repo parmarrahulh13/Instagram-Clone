@@ -1,6 +1,12 @@
+
+/* =====================================
+   MAIN REELS PAGE
+===================================== */
+
 .reels-page {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
 
     background: #0b0e12;
 
@@ -8,21 +14,25 @@
     justify-content: center;
 
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 
-/* =========================
+/* =====================================
    SCROLL CONTAINER
-========================= */
+===================================== */
 
 .reel-video {
-    height: 100vh;
+    height: 100%;
+    min-height: 0;
 
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     scroll-snap-type: y mandatory;
-
     scrollbar-width: none;
+
+    overscroll-behavior-y: contain;
 }
 
 .reel-video::-webkit-scrollbar {
@@ -30,27 +40,36 @@
 }
 
 
-/* =========================
-   ONE COMPLETE REEL ROW
-========================= */
+/* =====================================
+   ONE REEL ROW
+===================================== */
 
 .reel {
+    min-height: 100%;
     height: 100vh;
+    height: 100dvh;
 
     display: flex;
     align-items: center;
+    justify-content: center;
 
     scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    box-sizing: border-box;
+    position: relative;
 }
 
 
-/* =========================
-   LEFT INFO
-========================= */
+/* =====================================
+   LEFT USER INFORMATION
+===================================== */
 
 .reel-info {
-    width: 300px;
-
+    width: 260px;
+    flex-shrink: 1;
+    min-width: 0;
+    
     align-self: flex-end;
 
     margin-bottom: 35px;
@@ -61,7 +80,9 @@
 
 .user-info {
     display: flex;
-    align-items: center;
+    align-items: end;
+
+    flex-wrap: wrap;
 
     gap: 8px;
 
@@ -72,13 +93,17 @@
     width: 32px;
     height: 32px;
 
-    border-radius: 50%;
+    flex-shrink: 0;
 
+    border-radius: 50%;
     background: #333;
+
+    object-fit: cover;
 }
 
 .user-info strong {
     font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 .user-info span {
@@ -92,16 +117,16 @@
     color: #4da3ff;
 
     font-weight: 600;
-
     cursor: pointer;
 }
 
 .reel-info p {
     font-size: 14px;
-
-    line-height: 1.4;
+    line-height: 1.5;
 
     margin: 0 0 10px;
+
+    overflow-wrap: anywhere;
 }
 
 .music {
@@ -111,63 +136,70 @@
     gap: 8px;
 
     font-size: 13px;
+    overflow-wrap: anywhere;
 }
 
 .music i {
     font-size: 12px;
+    flex-shrink: 0;
+}
+
+.reel-username {
+    cursor: pointer;
 }
 
 
-/* =========================
-   VIDEO
-========================= */
+/* =====================================
+   VIDEO CONTAINER
+===================================== */
 
 .video-container {
     position: relative;
 
     width: 420px;
-    height: 685px;
+    height: min(685px, 88vh);
+    height: min(685px, 88dvh);
 
     flex-shrink: 0;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
-    /* White glow */
+    overflow: hidden;
+
     box-shadow:
-    0 0 15px rgba(255, 255, 255, 0.30),
-    0 0 40px rgba(255, 255, 255, 0.18),
-    0 25px 70px rgba(0, 0, 0, 0.60);
+        0 0 15px rgba(255, 255, 255, 0.22),
+        0 0 35px rgba(255, 255, 255, 0.10),
+        0 25px 70px rgba(0, 0, 0, 0.60);
 }
 
 .video {
+    display: block;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
-    border-radius: 5px;
-
-    display: block;
+    border-radius: inherit;
 
     cursor: pointer;
-
     background: #111;
 }
 
 
-/* =========================
-   RIGHT ACTIONS
-========================= */
+/* =====================================
+   RIGHT ACTION BUTTONS
+===================================== */
 
 .reel-actions {
-    width: 70px;
+    width: 60px;
+    flex-shrink: 0;
 
-    margin-left: 20px;
-    margin-top: 150px;
+    margin-left: 18px;
+    margin-top: 130px;
 
     display: flex;
     flex-direction: column;
-
     align-items: center;
 
     gap: 22px;
@@ -176,19 +208,16 @@
 .action {
     display: flex;
     flex-direction: column;
-
     align-items: center;
-    
+
     gap: 5px;
 
     color: white;
-
     cursor: pointer;
 }
 
 .action i {
     font-size: 25px;
-    /* font-weight:00; */
 
     transition: transform 0.2s ease;
 }
@@ -201,11 +230,6 @@
     font-size: 12px;
 }
 
-
-/* =========================
-   PROFILE
-========================= */
-
 .action-profile {
     margin-top: 5px;
     cursor: pointer;
@@ -216,54 +240,60 @@
     height: 28px;
 
     border-radius: 50%;
+    border: 2px solid white;
 
     background: #333;
-
-    border: 2px solid white;
-}
-.reel-username{
-    cursor: pointer;
+    object-fit: cover;
 }
 
 
-/* =========================
-   SOUND
-========================= */
+/* =====================================
+   SOUND BUTTON
+===================================== */
 
 .sound-button {
     position: absolute;
 
-    right: 15px;
-    bottom: 15px;
+    right: 14px;
+    bottom: 14px;
 
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: none;
     border-radius: 50%;
 
-    background: rgba(0, 0, 0, 0.6);
-
+    background: rgba(0, 0, 0, 0.65);
     color: white;
 
     cursor: pointer;
-}/* =====================================
+    z-index: 5;
+}
+
+
+/* =====================================
    SHARE OVERLAY
 ===================================== */
 
 .share-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background: rgba(0, 0, 0, 0.55);
+    padding: 16px;
+    box-sizing: border-box;
 
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(8px);
 
-    z-index: 100;
+    z-index: 1000;
 }
 
 
@@ -273,7 +303,13 @@
 
 .share-box {
     width: 420px;
-    max-height: 560px;
+    max-width: 100%;
+
+    max-height: 85vh;
+    max-height: 85dvh;
+
+    display: flex;
+    flex-direction: column;
 
     background: #171717;
     color: white;
@@ -283,12 +319,10 @@
 
     overflow: hidden;
 
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
 
     animation: shareOpen 0.2s ease;
 }
-
 
 @keyframes shareOpen {
     from {
@@ -308,7 +342,7 @@
 ===================================== */
 
 .share-header {
-    height: 65px;
+    min-height: 60px;
 
     display: flex;
     align-items: center;
@@ -317,6 +351,7 @@
     border-bottom: 1px solid #303030;
 
     position: relative;
+    flex-shrink: 0;
 }
 
 .share-header h2 {
@@ -326,58 +361,57 @@
 
 .share-header button {
     position: absolute;
-    right: 18px;
+    right: 12px;
 
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
 
     border: none;
-    background: transparent;
+    border-radius: 50%;
 
+    background: transparent;
     color: white;
 
-    font-size: 18px;
-
+    font-size: 20px;
     cursor: pointer;
 }
 
 .share-header button:hover {
     background: #292929;
-    border-radius: 50%;
 }
 
 
 /* =====================================
-   SEARCH
+   SHARE SEARCH
 ===================================== */
 
 .share-search {
-    margin: 15px 18px;
+    margin: 14px 16px;
 
-    height: 42px;
+    min-height: 42px;
 
     display: flex;
     align-items: center;
 
     gap: 10px;
-
     padding: 0 14px;
 
     background: #262626;
-
     border-radius: 10px;
 
     color: #999;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .share-search input {
     flex: 1;
+    min-width: 0;
 
     border: none;
     outline: none;
 
     background: transparent;
-
     color: white;
 
     font-size: 14px;
@@ -389,15 +423,17 @@
 
 
 /* =====================================
-   USERS
+   SHARE USERS LIST
 ===================================== */
 
 .share-users {
     padding: 5px 10px 15px;
 
-    max-height: 420px;
+    flex: 1;
+    min-height: 0;
 
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .share-users::-webkit-scrollbar {
@@ -411,7 +447,7 @@
 
 
 /* =====================================
-   USER
+   SHARE USER
 ===================================== */
 
 .share-user {
@@ -419,7 +455,6 @@
     align-items: center;
 
     gap: 12px;
-
     padding: 10px 8px;
 
     border-radius: 10px;
@@ -435,13 +470,15 @@
     width: 45px;
     height: 45px;
 
-    border-radius: 50%;
+    flex-shrink: 0;
 
+    border-radius: 50%;
     object-fit: cover;
 }
 
 .share-user-info {
     flex: 1;
+    min-width: 0;
 
     display: flex;
     flex-direction: column;
@@ -451,6 +488,7 @@
 
 .share-user-info strong {
     font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 .share-user-info span {
@@ -464,12 +502,14 @@
 ===================================== */
 
 .send-button {
+    flex-shrink: 0;
+
     border: none;
 
     background: white;
     color: black;
 
-    padding: 8px 17px;
+    padding: 9px 16px;
 
     border-radius: 8px;
 
@@ -477,7 +517,6 @@
     font-weight: 600;
 
     cursor: pointer;
-
     transition: 0.2s;
 }
 
@@ -502,6 +541,535 @@
     background: transparent;
 
     color: white;
+    cursor: pointer;
+}
+
+
+/* =====================================
+   TABLETS AND SMALL LAPTOPS
+===================================== */
+
+@media (max-width: 1100px) {
+    .reel-info {
+        width: 200px;
+        margin-right: 14px;
+    }
+
+    .video-container {
+        width: min(380px, 38vw);
+    }
+
+    .reel-actions {
+        width: 48px;
+        margin-left: 12px;
+        gap: 20px;
+    }
+
+    .action i {
+        font-size: 23px;
+    }
+}
+
+
+/* =====================================
+   MOBILE SCREENS
+===================================== */
+
+@media (max-width: 700px) {
+    .reels-page {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+
+        justify-content: center;
+    }
+
+    .reel-video {
+        width: 100%;
+        height: 100%;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .reel {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+
+        min-height: 0;
+
+        padding: 0;
+        gap: 0;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Full-height video with no desktop gaps */
+
+    .video-container {
+        width: 100%;
+        max-width: 470px;
+
+        height: 100%;
+        max-height: 100%;
+
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    .video {
+        border-radius: 0;
+        object-fit: cover;
+    }
+
+    /* Put information over the bottom of the video */
+
+    .reel-info {
+        position: absolute;
+
+        left: 14px;
+        right: 75px;
+        bottom: 24px;
+
+        width: auto;
+        max-width: 400px;
+
+        margin: 0;
+
+        align-self: auto;
+
+        z-index: 5;
+
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .user-info {
+        gap: 7px;
+        margin-bottom: 10px;
+    }
+
+    .profile-picture {
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-info strong {
+        font-size: 13px;
+    }
+
+    .reel-info p {
+        font-size: 13px;
+        line-height: 1.4;
+
+        margin-bottom: 8px;
+    }
+
+    .music {
+        font-size: 12px;
+    }
+
+    /* Action buttons on the right */
+
+    .reel-actions {
+        position: absolute;
+
+        right: 10px;
+        bottom: 85px;
+
+        width: 48px;
+
+        margin: 0;
+        margin-top: 0;
+
+        gap: 20px;
+
+        align-items: center;
+
+        z-index: 6;
+    }
+
+    .action {
+        gap: 4px;
+    }
+
+    .action i {
+        font-size: 25px;
+    }
+
+    .action span {
+        font-size: 11px;
+    }
+
+    .small-profile {
+        width: 27px;
+        height: 27px;
+    }
+
+    .action-profile {
+        margin-top: 3px;
+    }
+
+    /* Sound control */
+
+    .sound-button {
+        right: 14px;
+        bottom: 18px;
+
+        width: 34px;
+        height: 34px;
+    }
+
+    /* Share popup */
+
+    .share-overlay {
+        padding: 12px;
+        align-items: center;
+    }
+
+    .share-box {
+        width: 100%;
+        max-width: 420px;
+
+        max-height: 80vh;
+        max-height: 80dvh;
+
+        border-radius: 16px;
+    }
+
+    .share-header {
+        min-height: 56px;
+    }
+
+    .share-header h2 {
+        font-size: 17px;
+    }
+
+    .share-search {
+        margin: 12px;
+    }
+
+    .share-users {
+        padding: 4px 8px 10px;
+    }
+
+    .share-user {
+        gap: 10px;
+        padding: 9px 6px;
+    }
+
+    .share-user img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .send-button {
+        padding: 8px 13px;
+    }
+}
+
+
+/* =====================================
+   SMALL MOBILE SCREENS
+===================================== */
+
+@media (max-width: 380px) {
+    .reel-info {
+        left: 10px;
+        right: 65px;
+        bottom: 18px;
+    }
+
+    .reel-actions {
+        right: 7px;
+        bottom: 75px;
+
+        width: 43px;
+        gap: 17px;
+    }
+
+    .action i {
+        font-size: 22px;
+    }
+
+    .action span {
+        font-size: 10px;
+    }
+
+    .reel-info p {
+        font-size: 12px;
+    }
+
+    .user-info {
+        gap: 5px;
+    }
+
+    .share-overlay {
+        padding: 8px;
+    }
+
+    .share-box {
+        border-radius: 13px;
+    }
+
+    .share-user-info strong {
+        font-size: 13px;
+    }
+
+    .send-button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+
+/* =====================================
+   SHORT MOBILE SCREENS
+===================================== */
+
+@media (max-height: 550px) and (max-width: 700px) {
+    .reel-info {
+        bottom: 12px;
+    }
+
+    .reel-actions {
+        bottom: 60px;
+        gap: 12px;
+    }
+
+    .reel-info p {
+        margin-bottom: 5px;
+    }
+
+    .user-info {
+        margin-bottom: 5px;
+    }
+
+    .share-box {
+        max-height: 94vh;
+        max-height: 94dvh;
+    }
+}
+/* =====================================
+   REEL PROFILE DETAILS
+===================================== */
+
+.reel-info {
+    width: 290px;
+    min-width: 0;
+
+    margin: 0 22px 35px 0;
+
+    align-self: flex-end;
+
+    color: #fff;
+    z-index: 5;
+}
+
+
+/* =====================================
+   PROFILE + USERNAME + FOLLOW
+===================================== */
+
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+/* Profile picture */
+
+.profile-picture {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 2px solid #e1306c;
+
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+/* Username */
+
+.user-info strong {
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+/* Follow button */
+
+.user-info button {
+    flex-shrink: 0;
+
+    padding: 5px 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 7px;
+
+    background: transparent;
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
 
     cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.user-info button:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* =====================================
+   CAPTION
+===================================== */
+
+.reel-info p {
+    margin: 0 0 12px;
+
+    color: #fff;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   MUSIC
+===================================== */
+
+.music {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    width: 100%;
+    min-width: 0;
+
+    color: #f5f5f5;
+
+    font-size: 12px;
+
+    overflow: hidden;
+}
+
+.music i {
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+.music span {
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 700px) {
+    .reel-info {
+        position: absolute;
+
+        left: 16px;
+        right: 78px;
+        bottom: 28px;
+
+        width: auto;
+        max-width: 400px;
+
+        margin: 0;
+
+        align-self: auto;
+
+        z-index: 5;
+    }
+
+    .user-info {
+        gap: 9px;
+        margin-bottom: 12px;
+    }
+
+    .profile-picture {
+        width: 36px;
+        height: 36px;
+    }
+
+    .user-info strong {
+        font-size: 13px;
+    }
+
+    .user-info button {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    .reel-info p {
+        font-size: 12px;
+        line-height: 1.5;
+
+        margin-bottom: 10px;
+    }
+
+    .music {
+        font-size: 11px;
+    }
+}
+
+
+/* =====================================
+   SMALL PHONES
+===================================== */
+
+@media (max-width: 380px) {
+    .reel-info {
+        left: 12px;
+        right: 68px;
+        bottom: 22px;
+    }
+
+    .user-info {
+        gap: 7px;
+    }
+
+    .profile-picture {
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-info strong {
+        font-size: 12px;
+    }
+
+    .user-info button {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .reel-info p {
+        font-size: 11px;
+    }
 }
